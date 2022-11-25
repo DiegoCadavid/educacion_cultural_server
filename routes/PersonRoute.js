@@ -9,7 +9,7 @@ const locationRoute = express.Router();
 locationRoute.post(
   "/",
   [
-    body("di").exists().isString().isLength({min: 8, max:10}),
+    body("di").exists().isString().isLength({ min: 8, max: 10 }),
     body("fecha_nacimiento").exists().isString(),
     body("localidad").exists().isInt().toInt(),
     body("genero").exists().isString(),
@@ -53,15 +53,15 @@ locationRoute.get(
     try {
       const { id } = req.params;
 
-      const location = await Person.findById(id);
+      const person = await Person.findById(id);
 
-      if (!location) {
+      if (!person) {
         return res.status(400).json({
-          msg: "No existe una locacion con ese id",
+          msg: "No existe una persona con ese id",
         });
       }
 
-      res.status(200).json(location);
+      res.status(200).json(person);
     } catch (error) {
       res.status(500).json({ msg: "SERVER ERROR" });
     }
@@ -73,22 +73,27 @@ locationRoute.put(
   "/:id",
   [
     param("id").isMongoId(),
-    body("cantidad_colegios")
-      .optional()
-      .isInt()
-      .withMessage("Debe ser un numero")
-      .toInt(),
+    body("di").optional().isString().isLength({ min: 8, max: 10 }),
+    body("fecha_nacimiento").optional().isString(),
+    body("localidad").optional().isInt().toInt(),
+    body("genero").optional().isString(),
+    body("bppi").optional().isBoolean().toBoolean(),
+    body("bpps").optional().isBoolean().toBoolean(),
+    body("pe").optional().isBoolean().toBoolean(),
+    body("localidad_id").optional().isMongoId(),
+    body("colegio_id").optional().isMongoId(),
+    body("indicador_socio_economico").optional().isInt().toInt(),
     validateResults,
   ],
   async (req, res) => {
     try {
       const { id } = req.params;
 
-      const location = await Person.findById(id);
+      const person = await Person.findById(id);
 
-      if (!location) {
+      if (!person) {
         return res.status(400).json({
-          msg: "No existe una locacion con ese id",
+          msg: "No existe una persona con ese id",
         });
       }
 
@@ -96,8 +101,8 @@ locationRoute.put(
         locations: ["body"],
       });
 
-      await location.update(data);
-      res.status(200).json({ _id: location.id, ...data });
+      await person.update(data);
+      res.status(200).json({ _id: person.id, ...data });
     } catch (error) {
       res.status(500).json({ msg: "SERVER ERROR" });
     }
@@ -112,16 +117,16 @@ locationRoute.delete(
     try {
       const { id } = req.params;
 
-      const location = await Person.findById(id);
+      const persona = await Person.findById(id);
 
-      if (!location) {
+      if (!persona) {
         return res.status(400).json({
-          msg: "No existe una locacion con ese id",
+          msg: "No existe una persona con ese id",
         });
       }
 
-      await location.delete();
-      res.status(200).json({ _id: location.id});
+      await persona.delete();
+      res.status(200).json({ _id: persona.id });
     } catch (error) {
       res.status(500).json({ msg: "SERVER ERROR" });
     }
