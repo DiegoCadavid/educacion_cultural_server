@@ -6,5 +6,8 @@ const schoolSchema = new Schema({
   localidad_id: Schema.Types.ObjectId
 });
 
+import idPlugin from "mongoose-id";
+schoolSchema.plugin(idPlugin);
+
 const School = model("School", schoolSchema);
 export default School;

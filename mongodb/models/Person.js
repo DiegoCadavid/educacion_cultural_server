@@ -10,8 +10,11 @@ const PersonSchema = new Schema({
   pe: Boolean,
   localidad_id: Schema.Types.ObjectId,
   colegio_id: Schema.Types.ObjectId,
-  indicador_socio_economico: Number
+  indicador_socio_economico: Number,
 });
+
+import idPlugin from "mongoose-id";
+PersonSchema.plugin(idPlugin);
 
 const Person = model("Person", PersonSchema);
 export default Person;

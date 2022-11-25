@@ -5,6 +5,8 @@ const benefitSchema = new Schema({
   disponible: Number, 
   asignados: Number
 });
+import idPlugin from "mongoose-id";
+benefitSchema.plugin(idPlugin);
 
 const Location = model("benefit", benefitSchema);
 export default Location;
