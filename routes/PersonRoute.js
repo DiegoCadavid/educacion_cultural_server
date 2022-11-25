@@ -1,5 +1,6 @@
 import express from "express";
 import Person from "../mongodb/models/Person.js";
+import Benefit from '../mongodb/models/Benefit.js'
 import validateResults from "./middlewares/validateResults.js";
 import { body, param, matchedData } from "express-validator";
 
@@ -25,6 +26,30 @@ locationRoute.post(
     try {
       const data = matchedData(req, { locations: ["body"] });
       const person = new Person(data);
+
+      const { bppi, bpps } = data;
+
+      if(bppi) {
+        const bppiObject = await Benefit.findOne({
+          nombre: "bppi"
+        })
+
+        await bppiObject.update({
+          disponible: bppiObject.disponible - 1,
+          asignados: bppiObject.disponible + 1,
+        })
+      }
+
+      if(bpps) {
+        const bppiObject = await Benefit.findOne({
+          nombre: "bpps"
+        })
+
+        await bppiObject.update({
+          disponible: bppiObject.disponible - 1,
+          asignados: bppiObject.disponible + 1,
+        })
+      }
 
       await person.save();
 
