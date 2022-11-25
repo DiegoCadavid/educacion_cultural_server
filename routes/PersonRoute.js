@@ -132,21 +132,30 @@ locationRoute.put(
           nombre: "bppi"
         })
 
-        await bppiObject.update({
-          disponible: bppiObject.disponible - 1,
-          asignados: bppiObject.disponible + 1,
-        })
+        if(data.bppi){
+          await bppiObject.update({
+            disponible: bppiObject.disponible - 1,
+            asignados: bppiObject.disponible + 1,
+          })
+        }else{
+          await bppiObject.update({
+            disponible: bppiObject.disponible + 1,
+            asignados: bppiObject.disponible - 1,
+          })
+        }
       }
 
       if(data?.bpps) {
-        const bppiObject = await Benefit.findOne({
+        const bppsObject = await Benefit.findOne({
           nombre: "bpps"
         })
 
-        await bppiObject.update({
-          disponible: bppiObject.disponible - 1,
-          asignados: bppiObject.disponible + 1,
-        })
+        if(data.bpps) {
+          await bppsObject.update({
+            disponible: bppsObject.disponible - 1,
+            asignados: bppsObject.disponible + 1,
+          })
+        }
       }
 
       await person.update(data);
