@@ -146,12 +146,18 @@ const analisisBeneficios = (key) => {
 }
 
 
-console.log('total localidad 1',analisisBeneficios({localidad: 1}));
-console.log('total localidad 2',analisisBeneficios({localidad: 2}));
-console.log('total localidad 3',analisisBeneficios({localidad: 3}));
-console.log('total colegio 1',analisisBeneficios({colegio_id: 1}));
-console.log('total colegio 2',analisisBeneficios({colegio_id: 2}));
-console.log('total colegio 3',analisisBeneficios({colegio_id: 3}));
-console.log('total indicador socioeconomico 1',analisisBeneficios({indicador_socio_economico: 1}));
-console.log('total indicador socioeconomico 2',analisisBeneficios({indicador_socio_economico: 2}));
-console.log('total indicador socioeconomico 3',analisisBeneficios({indicador_socio_economico: 3}));
+// console.log('total localidad 1',analisisBeneficios({localidad: 1}));
+// console.log('total localidad 2',analisisBeneficios({localidad: 2}));
+// console.log('total localidad 3',analisisBeneficios({localidad: 3}));
+// console.log('total colegio 1',analisisBeneficios({colegio_id: 1}));
+// console.log('total colegio 2',analisisBeneficios({colegio_id: 2}));
+// console.log('total colegio 3',analisisBeneficios({colegio_id: 3}));
+// console.log('total indicador socioeconomico 1',analisisBeneficios({indicador_socio_economico: 1}));
+// console.log('total indicador socioeconomico 2',analisisBeneficios({indicador_socio_economico: 2}));
+// console.log('total indicador socioeconomico 3',analisisBeneficios({indicador_socio_economico: 3}));
+
+
+console.log(Localidad.findAll());
+console.log(Colegio.findAll());
+console.log(Beneficio.findAll());
+console.log(Persona.findAll());
