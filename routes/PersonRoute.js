@@ -125,6 +125,29 @@ locationRoute.put(
       const data = matchedData(req, {
         locations: ["body"],
       });
+      
+          
+      if(data?.bppi) {
+        const bppiObject = await Benefit.findOne({
+          nombre: "bppi"
+        })
+
+        await bppiObject.update({
+          disponible: bppiObject.disponible - 1,
+          asignados: bppiObject.disponible + 1,
+        })
+      }
+
+      if(data?.bpps) {
+        const bppiObject = await Benefit.findOne({
+          nombre: "bpps"
+        })
+
+        await bppiObject.update({
+          disponible: bppiObject.disponible - 1,
+          asignados: bppiObject.disponible + 1,
+        })
+      }
 
       await person.update(data);
       res.status(200).json({ _id: person.id, ...data });
